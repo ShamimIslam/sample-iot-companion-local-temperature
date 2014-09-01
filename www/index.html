@@ -1,0 +1,58 @@
+<!DOCTYPE html><!--HTML5 doctype-->
+<html>
+<head>
+	<title>Temperature Checker Companion App</title>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+	<style type="text/css">
+		/* Prevent copy paste for all elements except text fields */
+		*  { -webkit-user-select:none; -webkit-tap-highlight-color:rgba(255, 255, 255, 0); }
+		input, textarea  { -webkit-user-select:text; }
+		body { background-color:white; color:black }
+	</style>
+    <link rel="stylesheet" type="text/css" href="appframework/af.ui.css"></link>
+    <script type="text/javascript" charset="utf-8" src="appframework/appframework.ui.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.1.js"></script>
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js"></script>
+    //cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js
+    <link rel="stylesheet" type="text/css" href="css/main.css"></link>
+    <script src="intelxdk.js"></script>
+    <script src="cordova.js"></script>
+    
+    <script src='xhr.js'></script>
+    <script src="http://192.168.1.148:1337/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+        var onDeviceReady=function(){                             // called when Cordova is ready
+           if( window.Cordova && navigator.splashscreen ) {     // Cordova API detected
+                navigator.splashscreen.hide() ;                 // hide splash screen
+            }
+        } ;
+        document.addEventListener("deviceready", onDeviceReady, false) ;
+    </script>
+</head>
+<body>
+	<div id="afui">
+        
+        <div id="content">
+
+            <div id="main" title="LocalTemperature" class="panel" data-footer="none" selected="true">
+                <div class="center">
+                    <h1>How Hot is It?(°F)</h1>
+                    
+                    <div>
+<!--			             <canvas id="canvas"></canvas>-->
+                        <div id="hrt_chart">
+                        </div>
+                    </div>
+                </div>     
+                <div>
+                    <b>Log:</b><br>
+                    <div id="feedback_log" class="redtext"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="js/main.js"></script>
+</html>
