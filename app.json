@@ -1,0 +1,16 @@
+{
+	"reponame":"sample-local-temperature-companion",
+	"title":"Local Temperature Companion App",
+	"abbr":"Local Temperature",
+	"tooltip":"A simple app that visualizes data received wirelessly from the Local Temperature node.js/IoT project when running on a IoT platform such as a development board with a Temperature Sensor connected.",
+	"description":"A simple app that visualizes data received wirelessly from the Local Temperature node.js/IoT project when running on a IoT platform such as a development board with a Temperature Sensor connected.",
+	"articleurl":"http://software.intel.com/en-us/html5/articles/iot-local-temperature-nodejs-&-companion",
+    "screenshotUrl":"",
+    "iconUrl":"",
+	"highlights":["IoT Companion", "App Framework"],
+    "keywords":["IoT Companion", "App Framework"],
+	"visible": "true",
+	"apppreview":"false",
+	"appname":"demo.localtemperaturecompanion",
+	"relname":"4.0.0"
+}

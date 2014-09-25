@@ -1,22 +1,26 @@
-'use strict';
-var hrt_data =[];
+/* jshint strict: true, -W097  */
+/*global window, document, d3, $, io, navigator */
+"use strict";
+var chart_data =[];
 /*Creation of the d3 ScatterPlot*/
 var splot_dataset = [];
-var hrt_counter = 0;
+var chart_counter = 0;
 //shifting of line graph
 var xshift = -1;
 
-/*Creation of the d3 Chart*/
+//Creation of the d3 Chart
 var chart_data = [];
 
-/*Creation of d3 LineGraph*/
-var hrt_data_line = [10];
+//Creation of d3 LineGraph with an initial value
+var chart_data_line = [10];
 
-/*Creation of the d3 ScatterPlot*/
+//Creation of the d3 ScatterPlot
 var isPurged = 0;
 
-var hrt_purge_time = 0;
-var ekg_purge_marker = 0;
+var chart_purge_time = 0;
+
+//Set the height of the gauge
+document.getElementById("gauge").setAttribute("style","height:"+0.20*window.innerHeight+"px");
 
 //Create a JSON style object for the margin
 var margin = {
@@ -26,21 +30,20 @@ var margin = {
     left: 20
 };
 
-var h_width = 100000;
 var height = 0.5 * window.innerHeight;
 
-//Heartrate Scatterplot-Selects the specified DOM element for appending the svg 
-var hrt_svg = d3.select("#hrt_chart").append("svg").attr("id","container1").attr("width", h_width)
+//Scatterplot-Selects the specified DOM element for appending the svg 
+var chart_svg = d3.select("#chart").append("svg").attr("id","container1").attr("width", window.innerWidth)
 .attr("height", 0.6 * height).append("g");
 
-hrt_svg.attr("transform", "translate(25," + margin.top + ")");
+chart_svg.attr("transform", "translate(25," + margin.top + ")");
 
 var x1 = d3.scale.linear().domain([0, 5000]).range([0, 100000]);
 
 var y1 = d3.scale.linear().domain([0, 200]).range([0.5 * height, 0]);
 
 //Add X Axis grid lines
-hrt_svg.selectAll("line.y1")
+chart_svg.selectAll("line.y1")
   .data(y1.ticks(10))
   .enter().append("line")
   .attr("class", "y")
@@ -51,15 +54,15 @@ hrt_svg.selectAll("line.y1")
   .style("stroke", "rgba(8, 16, 115, 0.2)");
 
 //This is for the Scatterplot X axis label
-hrt_svg.append("text").attr("fill", "white").attr("text-anchor", "end").attr("x", 0.5 * h_width).attr("y", 0.55 * height).text("Periods");
+chart_svg.append("text").attr("fill", "red").attr("text-anchor", "end").attr("x", 0.5 * window.innerWidth).attr("y", 0.55 * height).text("Periods");
 
 var x1Axis = d3.svg.axis().scale(x1).orient("top").tickPadding(0).ticks(1000);
 var y1Axis = d3.svg.axis().scale(y1).orient("left").tickPadding(0);
 
-hrt_svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + y1.range()[0] + ")")
+chart_svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + y1.range()[0] + ")")
 .call(x1Axis);
 
-hrt_svg.append("g").attr("class", "y axis").call(y1Axis);
+chart_svg.append("g").attr("class", "y axis").call(y1Axis);
 
 var dottedline = d3.svg.line().x(function(d, i) {
     return x1(i);
@@ -68,96 +71,103 @@ var dottedline = d3.svg.line().x(function(d, i) {
 });
 
 
-hrt_purge_time=Math.round(((window.innerWidth*40)/969)-2);
+chart_purge_time=Math.round(((window.innerWidth*40)/969)-2);
 
-ekg_purge_marker=Math.round(((window.innerWidth*789)/413)); //Measuring chart_data count
-
-
-function purgeData(data){
-        if(data == "hrt"){
-            hrt_counter = 0;
+function purgeData(){
+            chart_counter = 0;
             xshift = -1;
-            hrt_data_line = [10];    
+            chart_data_line = [10];    
             splot_dataset = [];
             //Remove all of the nodes from the charts
-            hrt_svg.selectAll("#hgraph_l").remove();
-            hrt_svg.selectAll("#hgraph").remove();
-        }
-        else if(data == "ekg"){
-            chart_data = [2000];
-            tick();
-        }        
+            chart_svg.selectAll("#chart_graph").remove();     
 		//Data has been purged		
 		isPurged = 1;
 }
 
-function plot() { 	
-  /*-------------------------------For the Line Graph-------------------------------*/
-    //var tmp_hrt_data = [];
-    //hrt_data_line.push(hrt_data[0]);
-    //Add new element to the front of the array
-    //console.log("hrt_data before unshift "+hrt_data);
-    hrt_data.unshift(hrt_counter);
+function plot() {
+    /*-------------------------------For the Line Graph-------------------------------*/
+    chart_data.unshift(chart_counter);
     //Add new element to the end of the array
-    splot_dataset.push(hrt_data);
-    //console.log("Plot dataset " + splot_dataset);
+    splot_dataset.push(chart_data);
     //Empty heart rate data array
-    hrt_data = [];
-    hrt_counter++;
-    
+    chart_data = [];
+    chart_counter++;
     //Draw Line Graph && Draw circles
-    hrt_svg.selectAll("circle").data(splot_dataset).enter().append("svg").attr("id", "hgraph").append("circle").attr("cx", function(d, i) {
-        return x1(d[0]);
-    }).attr("cy", function(d) {
-        return y1(d[1]);
-    }).attr("r", 4).attr("class", "dot")
-    //.style("fill", "white");
-    .style("fill", function(d) {
-        if (d[1] > 100) {
-            return "red";
-        } else if ((d[1] > 59) && (d[1] < 101)) {
-            return "green"
-        } else {
-            return "white";
-        }
-    })
-    .attr("stroke", "black")
-    .attr("stroke-width", 1);
+    chart_svg.selectAll("circle").data(splot_dataset).enter().append("svg").attr(
+            "id", "chart_graph").append("circle").attr("cx", function(d, i) {
+            return x1(d[0]);
+        }).attr("cy", function(d) {
+            return y1(d[1]);
+        }).attr("r", 4).attr("class", "dot")
+        //.style("fill", "white");
+        .style("fill", function(d) {
+            if (d[1] > 100) {
+                return "red";
+            } else if ((d[1] > 59) && (d[1] < 101)) {
+                return "green";
+            } else {
+                return "white";
+            }
+        }).attr("stroke", "black").attr("stroke-width", 1);
+    //Handle purging data
+    if ((chart_purge_time === chart_counter) || (chart_counter >
+        chart_purge_time)) {
+        purgeData();
+    }
+}
+
+/*
+Function: validateIP()
+Description: Attempt to connect to server/Intel IoT platform
+*/
+function validateIP(){
+    var connection, socket;
+
+    //Get values from text fields
+    var ip_addr = $("#ip_address").val();
+    var port = $("#port").val();
+
+    //create script tag for socket.io.js file located on your IoT platform (development board)
+    var script = document.createElement("script");
+    script.setAttribute("src","http://"+ip_addr+":"+port+"/socket.io/socket.io.js");
+    document.head.appendChild(script);
+        
     
-	//Handle purging data
-	if((hrt_purge_time === hrt_counter) || (hrt_counter > hrt_purge_time)){
-		//alert("PURGE Heart rate Data");
-		purgeData("hrt");
-	}
-}
+    try{
+        //Connect to Server
+        socket = io.connect("http://"+ip_addr+":"+port);
 
-
-var connection, socket;
-try{
-    //Connect to the Galileo Server
-    socket = io.connect("http://192.168.1.148:1337");
-
-    //Attach a 'connected' event handler to the socket
-    socket.on("connected", function(message){
-        /*navigator.notification.alert(
-                message,  // message
+        //Attach a 'connected' event handler to the socket
+        socket.on("connected", function(message){
+            //Apache Cordova Notification
+            navigator.notification.alert(
+                "Great Job!",  // message
                 "",                     // callback
-                'Hi There!',            // title
+                'You are Connected!',            // title
                 'Ok'                  // buttonName
-            );*/
-    });
+            );
+            
+            //Set all Back button to not show
+            $.ui.showBackButton=false;
+            //Load page with transition
+            $.ui.loadContent("#main",false,false,"fade");
+        });
 
-    socket.on("message", function(message){
-        //console.log("Temperature is "+ message);
-        hrt_data.push(message);
-        plot();
-        //Update log
-        $("#feedback_log").text("Last Updated at "+Date().substr(0, 21));
-    });
+        socket.on("message", function(message){
+            chart_data.push(message);
+            plot();
+            //Update log
+            $("#feedback_log").text("Last Updated at "+Date().substr(0, 21));
+        });
+    }
+    catch(e){
+        navigator.notification.alert(
+            "Server Not Available!",  // message
+            "",                     // callback
+            'Connection Error!',            // title
+            'Ok'                  // buttonName
+        );
+    }
 }
-catch(e){
-    alert("Connection Error: Server Not Available");
-}
-
 
 
