@@ -7,9 +7,9 @@
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "blankproject",
       "sourceDirectory": "www",
-      "projectGuid": "cf0dc6e1-2bec-451e-b317-c158752a2ca0",
-      "lastModifiedDate": 1409326991021,
-      "creationDate": 1409315827961
+      "projectGuid": "cdde3da2-a7b4-4484-9562-e7ab9fadc3d5",
+      "lastModifiedDate": 1409315831010,
+      "creationDate": 1408070653851
     },
     "sourceDirectory": "www",
     "cordovaPluginsDirectory": "plugins",
@@ -34,14 +34,7 @@
     ],
     "cordovaPlugins": [
       {
-        "id": "org.apache.cordova.vibration",
-        "version": "0.3.5",
-        "selectedState": "Included",
-        "data": {},
-        "paramvals": {}
-      },
-      {
-        "id": "org.apache.cordova.dialogs",
+        "id": "org.apache.cordova.device",
         "version": "0.2.5",
         "selectedState": "Included",
         "data": {},
@@ -55,7 +48,14 @@
         "paramvals": {}
       },
       {
-        "id": "org.apache.cordova.device",
+        "id": "org.apache.cordova.vibration",
+        "version": "0.3.5",
+        "selectedState": "Included",
+        "data": {},
+        "paramvals": {}
+      },
+      {
+        "id": "org.apache.cordova.dialogs",
         "version": "0.2.5",
         "selectedState": "Included",
         "data": {},
@@ -69,7 +69,7 @@
         "name_": "Android",
         "preferences_": {},
         "isActive_": true,
-        "appName_": "TemperatureCheckerCompanion",
+        "appName_": "TouchNotifier",
         "appID_": "not.yet.specified",
         "appAccess_": "*",
         "icons_": [],
@@ -87,7 +87,7 @@
         "name_": "Android-Crosswalk",
         "preferences_": {},
         "isActive_": true,
-        "appName_": "TemperatureCheckerCompanion",
+        "appName_": "TouchNotifier",
         "appID_": "not.yet.specified",
         "appAccess_": "*",
         "icons_": [],
@@ -105,7 +105,7 @@
         "name_": "iOS",
         "preferences_": {},
         "isActive_": true,
-        "appName_": "TemperatureCheckerCompanion",
+        "appName_": "TouchNotifier",
         "appID_": "not.yet.specified",
         "appAccess_": "*",
         "icons_": [],
@@ -123,7 +123,7 @@
         "name_": "Windows8",
         "preferences_": {},
         "isActive_": true,
-        "appName_": "TemperatureCheckerCompanion",
+        "appName_": "TouchNotifier",
         "appID_": "not.yet.specified",
         "appAccess_": "*",
         "icons_": [],
@@ -141,7 +141,7 @@
         "name_": "WindowsPhone8",
         "preferences_": {},
         "isActive_": true,
-        "appName_": "TemperatureCheckerCompanion",
+        "appName_": "TouchNotifier",
         "appID_": "not.yet.specified",
         "appAccess_": "*",
         "icons_": [],

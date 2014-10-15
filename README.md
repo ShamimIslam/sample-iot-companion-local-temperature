@@ -1,12 +1,12 @@
-Local Temperature Companion App
+Touch Notifier Companion App
 ============================
-The Local Temperature Companion App is a simple app that visualizes data received from the Local Temperature node.js/IoT project when running on a IoT platform such as a development board with a Temperature sensor connected. This sensor is included in the Grove Starter Kit Plus - Intel® IoT Edition. For more information, go to https://software.intel.com/en-us/iot/devkit.
+The Touch Notifier Companion App is a simple app that receives data wirelessly and notifies a user if the Touch Sensor (https://software.intel.com/en-us/iot/sensor/grove-buzzer) is being touched. The Touch Notifier node.js/IoT project sends this data to a connected client when running on a IoT platform such as a development board with the sensor connected. This sensor is included in the Grove Starter Kit Plus - Intel® IoT Edition. For more information, go to https://software.intel.com/en-us/iot/devkit.
 
 Intel(R) XDK 
 -------------------------------------------
 This sample is part of the Intel(R) XDK IoT Edition. 
-Download the Intel(R) XDK IoT Edition at http://software.intel.com/en-us/html5. To see the technical details of the sample, 
-please visit the sample article page at http://software.intel.com/en-us/html5/articles/iot-local-temperature-nodejs-&-companion.
+Download the Intel(R) XDK IoT Edition at https://software.intel.com/en-us/html5/xdk-iot. To see the technical details of the sample, 
+please visit the sample article page at http://software.intel.com/en-us/html5/articles/iot-touch-notifier-nodejs-&-companion.
 
 
 Important App Files
@@ -20,7 +20,6 @@ Important App Files
 * app_framework/*
 * css/*
 * jquery/*
-* d3/*
 
 License Information Follows
 ---------------------------
@@ -63,9 +62,3 @@ jQuery
 http://jquery.com/
 source: https://github.com/jquery/jquery
 license: https://raw.githubusercontent.com/jquery/jquery/master/LICENSE.txt
-
-d3
------------------------------------------------------------------------------
-http://d3js.org/
-source: https://github.com/mbostock/d3
-license: https://github.com/mbostock/d3/blob/master/LICENSE
