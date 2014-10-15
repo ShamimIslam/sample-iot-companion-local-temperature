@@ -1,8 +1,7 @@
-/* jshint strict: true, -W097  */
-/*global window, document, d3, $, io, navigator */
+/*jslint plusplus:true*/
 
-/*jslint plusplus:true */
-/*global */
+/* jshint strict: true, -W097, unused:true, undef:true */
+/*global window, document, d3, $, io, navigator */
 
 var chart_data = [];
 /*Creation of the d3 ScatterPlot*/
@@ -84,7 +83,7 @@ function purgeData() {
     splot_dataset = [];
     //Remove all of the nodes from the charts
     chart_svg.selectAll("#chart_graph").remove();
-    //Data has been purged		
+    //Data has been purged
     isPurged = 1;
 }
 
@@ -131,12 +130,11 @@ function validateIP() {
         ip_addr = $("#ip_address").val(),
         port = $("#port").val(),
         script = document.createElement("script");
-    
+
     //create script tag for socket.io.js file located on your IoT platform (development board)
     script.setAttribute("src", "http://" + ip_addr + ":" + port + "/socket.io/socket.io.js");
     document.head.appendChild(script);
-        
-    
+
     try {
         //Connect to Server
         socket = io.connect("http://" + ip_addr + ":" + port);
@@ -150,7 +148,7 @@ function validateIP() {
                 'You are Connected!',            // title
                 'Ok'                  // buttonName
             );
-            
+
             //Set all Back button to not show
             $.ui.showBackButton = false;
             //Load page with transition
@@ -172,5 +170,4 @@ function validateIP() {
         );
     }
 }
-
 
