@@ -1,7 +1,7 @@
 /*jslint plusplus:true*/
 
-/* jshint strict: true, -W097, unused:true, undef:true */
-/*global window, document, d3, $, io, navigator */
+/* jshint strict: true, -W097, unused:false, undef:true */
+/*global window, document, d3, $, io, navigator, setTimeout */
 
 var chart_data = [];
 /*Creation of the d3 ScatterPlot*/
@@ -64,14 +64,6 @@ chart_svg.append("g").attr("class", "x axis").attr("transform", "translate(0," +
 
 chart_svg.append("g").attr("class", "y axis").call(y1Axis);
 
-var dottedline = d3.svg.line().x(function (d, i) {
-    'use strict';
-    return x1(i);
-}).y(function (d, i) {
-    'use strict';
-    return y1(d);
-});
-
 
 chart_purge_time = Math.round(((window.innerWidth * 40) / 969) - 2);
 
@@ -102,8 +94,7 @@ function plot() {
             return x1(d[0]);
         }).attr("cy", function (d) {
             return y1(d[1]);
-        }).attr("r", 4).attr("class", "dot")
-        //.style("fill", "white");
+        }).attr("r", 3).attr("class", "dot")
         .style("fill", function (d) {
             if (d[1] > 100) {
                 return "red";
@@ -134,40 +125,44 @@ function validateIP() {
     //create script tag for socket.io.js file located on your IoT platform (development board)
     script.setAttribute("src", "http://" + ip_addr + ":" + port + "/socket.io/socket.io.js");
     document.head.appendChild(script);
+    
+    //Wait 1 second before attempting to connect
+    setTimeout(function(){
+        try {
+            //Connect to Server
+            socket = io.connect("http://" + ip_addr + ":" + port);
 
-    try {
-        //Connect to Server
-        socket = io.connect("http://" + ip_addr + ":" + port);
+            //Attach a 'connected' event handler to the socket
+            socket.on("connected", function (message) {
+                //Apache Cordova Notification
+                navigator.notification.alert(
+                    "Great Job!",  // message
+                    "",                     // callback
+                    'You are Connected!',            // title
+                    'Ok'                  // buttonName
+                );
 
-        //Attach a 'connected' event handler to the socket
-        socket.on("connected", function (message) {
-            //Apache Cordova Notification
+                //Set all Back button to not show
+                $.ui.showBackButton = false;
+                //Load page with transition
+                $.ui.loadContent("#main", false, false, "fade");
+            });
+
+            socket.on("message", function (message) {
+                chart_data.push(message);
+                plot();
+                //Update log
+                $("#feedback_log").text("Last Updated at " + Date().substr(0, 21));
+            });
+        } catch (e) {
             navigator.notification.alert(
-                "Great Job!",  // message
+                "Server Not Available!",  // message
                 "",                     // callback
-                'You are Connected!',            // title
+                'Connection Error!',            // title
                 'Ok'                  // buttonName
             );
+        }
+    }, 1000);
 
-            //Set all Back button to not show
-            $.ui.showBackButton = false;
-            //Load page with transition
-            $.ui.loadContent("#main", false, false, "fade");
-        });
-
-        socket.on("message", function (message) {
-            chart_data.push(message);
-            plot();
-            //Update log
-            $("#feedback_log").text("Last Updated at " + Date().substr(0, 21));
-        });
-    } catch (e) {
-        navigator.notification.alert(
-            "Server Not Available!",  // message
-            "",                     // callback
-            'Connection Error!',            // title
-            'Ok'                  // buttonName
-        );
-    }
 }
 
