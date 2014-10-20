@@ -10,6 +10,7 @@
 	"highlights":["IoT Companion App", "App Framework"],
     "keywords":["IoT Companion App", "App Framework"],
 	"visible": "true",
+	"iot-companion":"true",
 	"apppreview":"false",
 	"appname":"demo.iotcompanionlocaltemperature",
 	"relname":"4.0.0"
