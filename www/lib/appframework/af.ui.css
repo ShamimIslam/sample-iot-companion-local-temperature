@@ -1,4 +1,4 @@
-/*! intel-appframework - v2.1.0 - 2014-03-18 */
+/*! intel-appframework - v2.1.0 - 2014-09-22 */
 
 /**********************************************************
     GENERAL UI ELEMENTS
@@ -155,19 +155,18 @@ body {
 
 #afui .header h1 {
     
-    position:absolute;
-    width:45%;
-    z-index:1;
-    text-align:center;
-    height:44px;
-    font-size:18px;
-    font-weight:bold;
-    left:27.5%;
-    color:inherit;
-    padding:10px 0;
-    text-shadow:rgba(0,0,0,0.8) 0 -1px 0;
-    text-align:center;
-    white-space:nowrap;
+    position: absolute;
+    width: 45%;
+    z-index: 1;
+    height: 44px;
+    font-size: 18px;
+    font-weight: bold;
+    left: 27.5%;
+    color: inherit;
+    padding: 10px 0;
+    text-shadow: rgba(0,0,0,0.8) 0 -1px 0;
+    text-align: center;
+    white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
 } /* This is text that appears in the header at the top of the screen */
@@ -296,7 +295,7 @@ body {
 #afui footer, #afui header, #afui nav, #afui aside {    display:none; }
 
 /* Show the active header/footer/navs */
-#afui .footer footer, #afui #menu nav, #afui .header header, #afui #aside_menu aside {display:block;}
+#afui .footer footer, #afui #menu nav, #afui .header header, #afui #aside_menu aside {display:block; height:100%;}
 
 #afui > #menu.tabletMenu {
     z-index:1;
@@ -573,13 +572,16 @@ body {
     background:#333;
 }
 
-#afui .panel .list {
+#afui .panel > .list, 
+#afui .panel > .afScrollPanel > .list {
     margin:0px -10px;
 }
 
-#afui .panel .list.inset {
+#afui .panel > .list.inset, 
+#afui .panel > .afScrollPanel > .list.inset {
     margin:0px;
 }
+
 
 /* Chevrons */
 @font-face {
@@ -662,6 +664,7 @@ body {
         overflow:visible !important;
       }
 }
+
 /* blue #0190d6
 
  */
@@ -687,7 +690,7 @@ body {
     width:45%;
 }
 
-#afui #backButton {
+#afui .backButton {
     background:rgba(249,249,249,1);
     color:#fff;
     display: block;
@@ -713,7 +716,7 @@ body {
     margin:0 !important;
 }
 
-#afui #backButton::before {
+#afui .backButton::before {
     z-index: -1;
     font-size:22px;
     position: absolute;
@@ -738,6 +741,10 @@ body {
     -webkit-transform:rotate(180deg);
     transform:rotate(180deg);
     background-color: transparent;
+}
+
+#afui header .backButton {
+    position:absolute;
 }
 
 #afui  .footer {
@@ -1270,22 +1277,22 @@ body {
   font-size:inherit;
 } 
 #afui .button {
-	position:relative;
-	display:inline-block;
-	padding:8px 12px;
-	margin:8px 0;
-	font-weight:bold;
-	color:#000;
-	text-align:center;
-	vertical-align:top;
-	cursor:pointer;
-	background-color:#eee;
-	border:1px solid #666;
-	border-radius:6px;
-	/*box-shadow: 0 1px 0 #fff;*/
+    position:relative;
+    display:inline-block;
+    padding:8px 12px;
+    margin:8px 0;
+    font-weight:bold;
+    color:#000;
+    text-align:center;
+    vertical-align:top;
+    cursor:pointer;
+    background-color:#eee;
+    border:1px solid #666;
+    border-radius:6px;
+    /*box-shadow: 0 1px 0 #fff;*/
 
-	text-decoration: none;
-	z-index:2;
+    text-decoration: none;
+    z-index:2;
 }
 
 /* Active */
@@ -1293,52 +1300,52 @@ body {
 
 #afui .button.previous {
 
-	margin-left:16px;
-	padding-left:6px;
-	border-color:#666 #666 transparent transparent !important;
+    margin-left:16px;
+    padding-left:6px;
+    border-color:#666 #666 transparent transparent !important;
 }
 #afui .button.next {
-	border-color:#666 transparent #666 #666 !important;
-	margin-right:16px;
-	padding-right:6px;
+    border-color:#666 transparent #666 #666 !important;
+    margin-right:16px;
+    padding-right:6px;
 }
 
 
 #afui .button.previous::after {
 
     z-index:-1;
-	content:'';
-	position:absolute;
-	width:25px; height:25px;
-	background-color:inherit;
-  	top:3px; left:-11px;
+    content:'';
+    position:absolute;
+    width:25px; height:25px;
+    background-color:inherit;
+    top:3px; left:-11px;
     border-radius:5px;
     border:1px solid;
-	border-color:transparent transparent inherit transparent;
+    border-color:transparent transparent inherit transparent;
      -webkit-transform:rotate(45deg); transform:rotate(45deg);
 }
 #afui .button.next::after {
-	z-index:-1;
-	content:'';
-	position:absolute;
-	width:25px; height:25px;
-	background-color:inherit;
-  	top:3px; right:-11px;
+    z-index:-1;
+    content:'';
+    position:absolute;
+    width:25px; height:25px;
+    background-color:inherit;
+    top:3px; right:-11px;
     border-radius:5px;
     border:1px solid;
     border-color:transparent transparent transparent transparent;
    -webkit-transform:rotate(45deg); transform:rotate(45deg);
 }
 
-#afui .button.block {	display:block; }
+#afui .button.block {   display:block; }
 
 #afui .button.flat {
-	border-radius: 0;
-	box-shadow:none;
+    border-radius: 0;
+    box-shadow:none;
 }
 
 #afui .header .button-grouped>.button {
-	margin:0;
+    margin:0;
     border-color:#fff;
 }
 
@@ -1347,127 +1354,127 @@ body {
     margin: 5px;
 }
 #afui .button-grouped * {
-	border-radius:0px;
-	float:left;
-	border-left:0px solid transparent;
-	border-right: 1px solid #666;
-	border-bottom: 1px solid #666;
-	border-top: 1px solid #666;
+    border-radius:0px;
+    float:left;
+    border-left:0px solid transparent;
+    border-right: 1px solid #666;
+    border-bottom: 1px solid #666;
+    border-top: 1px solid #666;
     margin:0;
 }
 #afui .button-grouped > .button:first-child {
-	border-left: 1px solid #666;
-	border-top-left-radius: 6px;
-	border-bottom-left-radius: 6px;
+    border-left: 1px solid #666;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
 }
 #afui .button-grouped > .button:last-child {
-	border-top-right-radius: 6px;
-	border-bottom-right-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
 }
 
 #afui .button-grouped.flex {
-	display: -webkit-box;
-  	display: -moz-box;
-  	display: -ms-flexbox;
-  	display: -webkit-flex;
-  	display: flex;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
 }
 
 #afui .button-grouped.flex > .button {
-	-webkit-box-flex: 1;
-  	-moz-box-flex: 1 auto;
-  	-webkit-flex: 1 auto;
-  	-ms-flex: 1 auto;
-  	flex: 1 auto;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1 auto;
+    -webkit-flex: 1 auto;
+    -ms-flex: 1 auto;
+    flex: 1 auto;
 
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #afui .button-grouped.flex.vertical {
-	display: inline-block;
+    display: inline-block;
 }
 
 #afui .button-grouped.vertical * {
-	border-radius:0px;
-	display:block;
-	float:none;
-	width:100%;
-	border-left: 1px solid #666;
-	border-right: 1px solid #666;
-	border-top: 1px solid #666;
+    border-radius:0px;
+    display:block;
+    float:none;
+    width:100%;
+    border-left: 1px solid #666;
+    border-right: 1px solid #666;
+    border-top: 1px solid #666;
     border-bottom: 0px solid #666;
 }
 
 #afui .button-grouped.vertical > .button:first-child {
-	border-top-left-radius: 6px;
-	border-top-right-radius: 6px;
-	border-bottom-left-radius:0px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-left-radius:0px;
     border-bottom-right-radius:0px;
 }
 #afui .button-grouped.vertical > .button:last-child {
-	border-top-right-radius:0px;
+    border-top-right-radius:0px;
     border-top-left-radius:0px;
-	border-bottom-right-radius: 6px;
-	border-bottom-left-radius: 6px;
-	border-bottom:1px solid #666;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-bottom:1px solid #666;
 }
 
 
 #afui .button.gray {
-	background:#999;
-	border-color:#666;
+    background:#999;
+    border-color:#666;
 }
 
 #afui .button.yellow {
-	background-color:#F1C222;
-	border-color:#999;
+    background-color:#F1C222;
+    border-color:#999;
 }
 
 #afui .button.red {
-	color:#fff;
-	text-shadow:0 -1px 0 #666;
-	background:#B20000;
-	border-color:#666;
+    color:#fff;
+    text-shadow:0 -1px 0 #666;
+    background:#B20000;
+    border-color:#666;
 }
 
 #afui .button.green {
-	color:#fff;
-	text-shadow:0 -1px 0 #666;
-	background:#009C0C;
-	border-color:#666;
+    color:#fff;
+    text-shadow:0 -1px 0 #666;
+    background:#009C0C;
+    border-color:#666;
 }
 
 #afui .button.orange {
-	color:#fff;
-	text-shadow:0 -1px 0 #666;
-	background-color:#FF8000;
-	border-color:#666;
+    color:#fff;
+    text-shadow:0 -1px 0 #666;
+    background-color:#FF8000;
+    border-color:#666;
 }
 
 #afui .button.black {
-	color:#fff;
-	text-shadow:none;
-	background:#000;
-	border-color:#666;
+    color:#fff;
+    text-shadow:none;
+    background:#000;
+    border-color:#666;
 }
 
 #afui .button.slate {
-	color:#fff;
-	text-shadow:0 -1px 0 #000;
-	background:#171F28;
-	border-color:#666;
+    color:#fff;
+    text-shadow:0 -1px 0 #000;
+    background:#171F28;
+    border-color:#666;
 }
 
 #afui .header .button {
     color: #fff;
     background:none;
     border-color: transparent;
- 	font-size:12px;
-	padding:7px;
- 	height:32px;
-	margin:5px;
+    font-size:12px;
+    padding:7px;
+    height:32px;
+    margin:5px;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
@@ -1476,28 +1483,28 @@ body {
     padding-left:6px;
 }
  
-#afui #backButton {
+#afui .backButton {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
 #afui .af-badge {
-	position:absolute;
-	top:2px; right:2px;
-	display:inline-block;
-	min-width:20px;	max-width:90%; height:20px;
-	padding:0 3px;
-	background-color:red;
-	border-radius:20px;
-	
-	font-size:12px;
-	line-height:19px;
-	font-weight:bold;
-	
-	color:#fff;
-	text-overflow:ellipsis;
-	text-align:center;
-	text-shadow:0 -1px 0 rgba(64,0,0,.6);
+    position:absolute;
+    top:2px; right:2px;
+    display:inline-block;
+    min-width:20px; max-width:90%; height:20px;
+    padding:0 3px;
+    background-color:red;
+    border-radius:20px;
+    
+    font-size:12px;
+    line-height:19px;
+    font-weight:bold;
+    
+    color:#fff;
+    text-overflow:ellipsis;
+    text-align:center;
+    text-shadow:0 -1px 0 rgba(64,0,0,.6);
 }
 
 #afui .af-badge.br { bottom:2px; right:2px; top:auto; left:auto; }
@@ -1549,15 +1556,15 @@ body {
  */
 
 #afui.android {
-	font:14px  'Roboto',sans-serif;
- 	background:#000;
- 	color:#fff;
+    font:14px  'Roboto',sans-serif;
+    background:#000;
+    color:#fff;
     border-color:#fff;
 }
 
 #afui.android.light {
-	background:#FDFDFD;
-	color:#000;
+    background:#FDFDFD;
+    color:#000;
 }
 
 #afui.android  .header {
@@ -1573,7 +1580,7 @@ body {
     box-shadow:none;
 }
 
-#afui.android #backButton{
+#afui.android .backButton{
     background: inherit;
     color:inherit;
 }
@@ -1588,44 +1595,44 @@ body {
 
 #afui.android .footer {
     box-shadow: none;
- 	background:inherit;
- 	border-top:2px solid #33B5E5;
+    background:inherit;
+    border-top:2px solid #33B5E5;
     border-bottom:none;
     padding:0;
 }
 
 #afui.android .footer>footer>a:not(.button) {
-	color:inherit;
+    color:inherit;
     top:0px;
 }
 
 #afui.android .footer>footer>a.pressed:not(.button) {
- 	border:0px;
- 	border-top:4px solid #33B5E5;
- 	border-radius:0px;
- 	background:none;
+    border:0px;
+    border-top:4px solid #33B5E5;
+    border-radius:0px;
+    background:none;
 }
 
 #afui.android .footer>footer>a.icon.pressed:not(.button):before {
-	color:inherit;
+    color:inherit;
 }
 
 #afui.android .af-badge {
-	border:none;
+    border:none;
 }
 
 #afui.android .panel, #afui.android #modalContainer {
- 	background:inherit;
- 	color:inherit;
+    background:inherit;
+    color:inherit;
 }
 
 #afui.android .list {
- 	background:inherit;
- 	color:inherit;
- 	border-color:#303030;
+    background:inherit;
+    color:inherit;
+    border-color:#303030;
 }
 
-#afui.android .list .divider {	color:black; }
+#afui.android .list .divider {  color:black; }
 
 #afui.android .panel h2 { color:inherit; }
 
@@ -1656,8 +1663,32 @@ body {
 #afui.android input[type="number"], #afui.android input[type="email"],
 #afui.android input[type="url"], #afui.android input[type="tel"],
 #afui.android input[type="color"], #afui.android .input-group {
-	background:inherit;
-	color:inherit;
+    background:inherit;
+    color:inherit;
+}
+
+#afui.android input[type="range"] {
+   -webkit-appearance: none;
+background-color: #ccc;
+height: 4px;
+position: relative;
+top: -10px;
+margin-top: 15px;
+}
+ 
+#afui.android input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    position: relative;
+    
+    z-index: 1;
+    width: 11px;
+    height: 21px;
+ 
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ccc), color-stop(100%,#ccc));
+    background-image: gradient(linear, left top, left bottom, color-stop(0%,#ccc), color-stop(100%,#ccc));
 }
 
 #afui.android input.toggle+label:after { color:inherit; }
@@ -1665,23 +1696,23 @@ body {
 #afui.android input.toggle+label { border-radius:0; }
 
 #afui.android input.toggle+label > span {
-	border-radius:0;
-	top:0;
-	width:27px;
-	height:23px;
+    border-radius:0;
+    top:0;
+    width:27px;
+    height:23px;
 }
 
 #afui.android label { color:inherit; }
 
 #afui.android input[type="radio"]:checked+label:before,#afui.android input[type="checkbox"]:checked+label:before {
-	background: #33B5E5;
+    background: #33B5E5;
 }
 
 #afui.android > #aside_menu,
 #afui.android > #menu {
     border-right:1px solid rgba(128,128,128,0.5);
-	color:inherit;
-	background:inherit;
+    color:inherit;
+    background:inherit;
 }
 
 #afui.android #aside_menu .list li,
@@ -1692,9 +1723,9 @@ body {
 
 #afui.android #aside_menu .list .divider,
 #afui.android #menu .list .divider {
-	background:inherit;
-	color:inherit;
-	font-size: 1em;
+    background:inherit;
+    color:inherit;
+    font-size: 1em;
 }
 
 #afui.android #aside_menu .list > li > a,
@@ -1706,17 +1737,17 @@ body {
 
 #afui.android #aside_menu .list,
 #afui.android #menu .list {
-	font-weight: normal;
+    font-weight: normal;
 }
 
 #afui.android .button {
-	border-radius:0;
-	border:none;
-	background:#424343;
-	border-color:transparent;
-	color:inherit;
-	text-shadow:none;
-	box-shadow: inset 0 1px 0 rgba(255,255,255,.4);
+    border-radius:0;
+    border:none;
+    background:#424343;
+    border-color:transparent;
+    color:inherit;
+    text-shadow:none;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.4);
 }
 
 #afui.android.light .button {
@@ -1726,23 +1757,23 @@ body {
 
 #afui.android .button.pressed,
 #afui.android  .header .button-grouped > .button.pressed {
-	background:#33B5E5;
-	border-color:#33B5E5;
+    background:#33B5E5;
+    border-color:#33B5E5;
 }
 
 #afui.android .button.previous::after {
-	width:20px; height:20px;
-	background-color:inherit;
-  	top:5px; left:-12px;
+    width:20px; height:20px;
+    background-color:inherit;
+    top:5px; left:-12px;
     border-radius:0;
     box-shadow:none;
     border-color:transparent;
 }
 
 #afui.android .button.next::after {
-	width:20px; height:20px;
-	background-color:inherit;
-  	top:5px; right:-12px;
+    width:20px; height:20px;
+    background-color:inherit;
+    top:5px; right:-12px;
     border-radius:0;
     box-shadow:none;
     border-color:transparent;
@@ -1879,10 +1910,10 @@ body {
 
 
 #afui.win8 {
-	font:14px  "Segoe UI Semilight", "HelveticaNeue-light", Helvetica, Arial, sans-serif;
+    font:14px  "Segoe UI Semilight", "HelveticaNeue-light", Helvetica, Arial, sans-serif;
   font-size:14px;
- 	background-color:#000;
- 	color:#fff;
+    background-color:#000;
+    color:#fff;
 }
 
 #afui.win8.light {
@@ -1898,11 +1929,11 @@ body {
 
 
 
-#afui.win8 #backButton.pressed {
+#afui.win8 .backButton.pressed {
     background:inherit;
 }
 
-#afui.win8 #backButton {
+#afui.win8 .backButton {
   color:inherit;
   background:inherit;
   margin:0;
@@ -1922,7 +1953,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-#afui.win8 #backButton::before {
+#afui.win8 .backButton::before {
   content: "\e000";
   font-size:30px;
   position:absolute;
@@ -1936,23 +1967,23 @@ body {
 }
 
 #afui.win8 .header h1 {
-	text-align: left;
+    text-align: left;
     color:inherit;
 }
 
 #afui.win8 .header{
     border:0px;
-	background: inherit;
-	border-bottom:inherit;
+    background: inherit;
+    border-bottom:inherit;
     color:inherit;
 }
 
 #afui.win8 .footer {
     padding:0px;
- 	background:inherit;
- 	text-align: center;
- 	height:65px;
- 	background:rgba(33,32,33,.9);
+    background:inherit;
+    text-align: center;
+    height:65px;
+    background:rgba(33,32,33,.9);
     border-top:none;
 }
  
@@ -1982,7 +2013,7 @@ body {
 }
 
 #afui.win8 .footer>footer>a.icon.pressed:not(.button):before {
-	background-color: #00ABA9;
+    background-color: #00ABA9;
 }
 
 #afui.win8 .footer>footer>a.icon:not(.button):before {
@@ -2000,43 +2031,43 @@ body {
 }
 
 #afui.win8 .footer>footer>a:not(:last-of-type):not(.button){
-  	border:none;
+    border:none;
 }
 
 #afui.win8 .af-badge {
-	border:none;
+    border:none;
 }
 
 #afui.win8 #content,#afui.win8 #content > .panel {
- 	background:inherit;
- 	color:inherit;
+    background:inherit;
+    color:inherit;
 }
 
 #afui.win8 .list {
- 	background:inherit;
- 	color:inherit;
- 	border-color:#303030;
+    background:inherit;
+    color:inherit;
+    border-color:#303030;
 }
 
 #afui.win8 .list .divider,  #afui.win8 #menu.tabletMenu .list .divider  {
- 	background:#00ABA9;
- 	padding:5px;
+    background:#00ABA9;
+    padding:5px;
     display:inline;
- 	font-size:16px;
- 	font-weight:normal;
- 	border-top:none;
- 	border-bottom:none;
+    font-size:16px;
+    font-weight:normal;
+    border-top:none;
+    border-bottom:none;
     color:inherit;
 }
 
 #afui.win8 .list li {
- 	border-top:none;
- 	border-bottom:none;
+    border-top:none;
+    border-bottom:none;
     font-size:20px;
 }
 
 #afui.win8 .panel h2 {
- 	color:inherit;
+    color:inherit;
     font-weight:normal;
     font-size:34px;
     line-height:34px;
@@ -2062,7 +2093,7 @@ body {
 #afui.win8.light .afScrollbar {background:black !important;}
 
 #afui.win8 select, #afui.win8 textarea, #afui.win8 input[type="text"], #afui.win8 input[type="search"], #afui.win8 input[type="password"], #afui.win8 input[type="datetime"], #afui.win8 input[type="datetime-local"], #afui.win8 input[type="date"], #afui.win8 input[type="month"], #afui.win8 input[type="time"], #afui.win8 input[type="week"], #afui.win8 input[type="number"], #afui.win8 input[type="email"], #afui.win8 input[type="url"], #afui.win8 input[type="tel"], #afui.win8 input[type="color"], #afui.win8 .input-group {
-  	background:black;
+    background:black;
     color:inherit;
 }
 
@@ -2071,32 +2102,32 @@ body {
 }
 
 #afui.win8 input.toggle+label:after {
-	color:inherit;
+    color:inherit;
 }
 
 #afui.win8 input.toggle+label {
-	border-radius:0;
+    border-radius:0;
 }
 
 #afui.win8 input.toggle:checked+label {
-	background:#00ABA9;
+    background:#00ABA9;
 }
 
 #afui.win8 input.toggle+label > span {
-	border-radius:0;
-	top:0;
-	width:27px;
-	height:23px;
+    border-radius:0;
+    top:0;
+    width:27px;
+    height:23px;
 }
 
 #afui.win8 input[type="radio"]:checked+label:before,#afui.win8 input[type="checkbox"]:checked+label:before {
-	background: #00ABA9;
+    background: #00ABA9;
 }
 
 #afui.win8 > #menu {
   border-right:1px solid rgba(128,128,128,0.5);
-	color:inherit;
-	background:inherit;
+    color:inherit;
+    background:inherit;
 }
 
 #afui.win8 > #aside_menu {
@@ -2113,7 +2144,7 @@ body {
 }
 
 #afui.win8 #menu .list {
-	font-weight: normal;
+    font-weight: normal;
 }
 
 #afui.win8 #menu .list li,#afui.win8 #menu .list .divider {
@@ -2121,21 +2152,21 @@ body {
 }
 
 #afui.win8 .button {
-	border-radius:0;
-	border:none;
-	background:inherit;
-	border:3px solid #fff;
-	color:inherit;
-	text-shadow:none;
-	box-shadow:none;
+    border-radius:0;
+    border:none;
+    background:inherit;
+    border:3px solid #fff;
+    color:inherit;
+    text-shadow:none;
+    box-shadow:none;
 }
 
 #afui.win8.light .button {
-	border:3px solid #000;
+    border:3px solid #000;
 }
 
 #afui.win8 .button.pressed {
-	background:#00ABA9;
+    background:#00ABA9;
 }
 
 #afui.win8 .button.next, #afui.win8 .button.previous {
@@ -2285,24 +2316,47 @@ body {
 
 @media handheld, only screen and (min-width: 768px){
 
-	#afui.win8 .footer footer #metroMenu {
-		display:none;
-	}
-	#afui.win8 .footer {
-		-webkit-transform:translate3d(0,0,0);
-		transform:translate(0,0);
-	}
-	#afui.win8 #menu  {
-		background:inherit;
+    #afui.win8 .footer footer #metroMenu {
+        display:none;
+    }
+    #afui.win8 .footer {
+        -webkit-transform:translate3d(0,0,0);
+        transform:translate(0,0);
+    }
+    #afui.win8 #menu  {
+        background:inherit;
     color:inherit;
     font-size:18px;
     left:0;
     top:0;
     width:200px;
-	}
+    }
     #afui.win8 #menu .list > li > a:after{
         margin-top:-11px;
     }
+}
+
+
+#afui.win8 input[type="range"] {
+   -webkit-appearance: none;
+   -webkit-appearance: none;
+background-color: #ccc;
+height: 4px;
+position: relative;
+top: -10px;
+margin-top: 15px;
+
+}
+ 
+#afui.win8 input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    position: relative;    
+    z-index: 1;
+    width: 15px;
+    height: 15px;
+    
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ccc), color-stop(100%,#ccc));
+    background-image: gradient(linear, left top, left bottom, color-stop(0%,#ccc), color-stop(100%,#ccc));
 }
 
 #afui.bb {
@@ -2330,7 +2384,7 @@ body {
     font-weight: normal;
 }
 
-#afui.bb #backButton {
+#afui.bb .backButton {
     display: block;
     position: absolute;
     line-height:60px;
@@ -2355,7 +2409,7 @@ body {
     margin:0 !important;
 }
 
-#afui.bb #backButton::before {
+#afui.bb .backButton::before {
     z-index: -1;
     font-size:22px;
     position: absolute;
@@ -2383,7 +2437,7 @@ body {
     background-color: transparent;
 }
 
-#afui.bb #backButton::after {
+#afui.bb .backButton::after {
     z-index: -1;
     font-size:24px;
     content: ' ';
@@ -2562,6 +2616,14 @@ body {
     border-bottom:1px solid rgba(158,158,158,255);
 }
 
+
+#afui.ios7.overlayStatusbar{
+   margin-top: 20px;
+background: #f9f9f9;
+margin-bottom: -20px;
+padding-bottom: 20px;
+}
+
 #afui.ios7 .header .button {
     color:rgba(82,155,234,255);
     border-color:transparent;
@@ -2610,7 +2672,7 @@ body {
 #afui.ios7 > #menu {
     border-right:1px solid #bbb;
     background:rgba(238,238,238,255);
-    color:black;
+    color:inherit;
 }
 
 #afui.ios7 #aside_menu .list li,#afui.ios7 #aside_menu .list .divider,#afui.ios7 #aside_menu .list li:first-child,#afui.ios7 #aside_menu .list li:last-child,
@@ -2626,19 +2688,18 @@ body {
     color:inherit;
     font-size: 1em;
     border-bottom:1px solid rgb(215,215,215);
-    color:black;
 }
 
 #afui.ios7 #aside_menu .list a,
 #afui.ios7 #menu .list a {
-    color:black;
+    color:inherit;
 }
 
 #afui.ios7 #aside_menu .list,
 #afui.ios7 #menu .list {
     background:white;
     font-weight: normal;
-    color:black;
+    color:inherit;
 }
 
 #afui.ios7 .list > li > a:after{
@@ -2649,7 +2710,7 @@ body {
     background-color:transparent;
 }
 
-#afui.ios7 #backButton {
+#afui.ios7 .backButton {
     background:rgba(249,249,249,1);
     color:rgba(82,155,234,255);
     display: block;
@@ -2664,7 +2725,7 @@ body {
     border:none;
     border-color: transparent;
     height: 44px;
-    top:0;
+    top:auto;
     border-radius: 0;
     box-shadow:none;
     margin: 0;
@@ -2675,7 +2736,7 @@ body {
     margin:0 !important;
 }
 
-#afui.ios7 #backButton::before {
+#afui.ios7 .backButton::before {
     z-index: -1;
     font-size:22px;
     position: absolute;
@@ -2702,7 +2763,7 @@ body {
     background-color: transparent;
 }
 
-#afui.ios7 #backButton::after {
+#afui.ios7 .backButton::after {
     content: '';
     width:0;
     height:0;
@@ -2932,6 +2993,29 @@ body {
     font-size:12px;
 }
 
+#afui.ios7 input[type="range"] {
+   -webkit-appearance: none;
+background-color: #333;
+height: 4px;
+position: relative;
+top: -10px;
+margin-top: 15px;
+border-radius:2px;
+}
+ 
+#afui.ios7 input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    position: relative;    
+    z-index: 1;
+    width: 15px;
+    height: 15px;
+    -webkit-border-radius: 40px;    
+    border-radius: 40px;
+    border:1px solid #333;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ccc), color-stop(100%,#ccc));
+    background-image: gradient(linear, left top, left bottom, color-stop(0%,#ccc), color-stop(100%,#ccc));
+}
+
 /* iOS theme */
 #afui.ios {
     color:black;
@@ -2990,7 +3074,7 @@ body {
     color:#fff;
 }
 
-#afui.ios #backButton {
+#afui.ios .backButton {
     line-height:15px;
     width:58px;
     display:block;
@@ -3012,7 +3096,7 @@ body {
     padding-left:4px !important;
 } /* Sets up positioning of the back button which appears in the header */
 
-#afui.ios #backButton::before {
+#afui.ios .backButton::before {
     z-index:-1;
     content:'';
     position:absolute;
@@ -3150,6 +3234,29 @@ body {
     color:white;
     text-shadow:0 -1px 0 #000;
 }
+
+#afui.ios input[type="range"] {
+   -webkit-appearance: none;
+background-color: #ccc;
+height: 2px;
+position: relative;
+top: -10px;
+margin-top: 15px;
+}
+ 
+#afui.ios input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    position: relative;
+    
+    z-index: 1;
+    width: 15px;
+    height: 15px;
+ 
+    -webkit-border-radius: 40px;    
+    border-radius: 40px;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ebf1f6), color-stop(50%,#abd3ee), color-stop(51%,#89c3eb), color-stop(100%,#d5ebfb));
+    background-image: gradient(linear, left top, left bottom, color-stop(0%,#ebf1f6), color-stop(50%,#abd3ee), color-stop(51%,#89c3eb), color-stop(100%,#d5ebfb));
+}
 #af_actionsheet {
     position:absolute;
     left:0px;
@@ -3233,9 +3340,7 @@ body {
     padding: 10px;
     opacity: 1;
     -webkit-transform: scale(1);
-    -webkit-transition: all  0.20s  ease-in-out;
     transform:scale(1);
-    transition: all 0.20s  ease-in-out;
     position: absolute;
     z-index: 1000000;
     top: 50%;
@@ -3250,10 +3355,13 @@ body {
 
 .afPopup.hidden {
     opacity: 0;
-    -webkit-transform: scale(0);
-    top: 50%;
-    left: 50%;
-    margin: 0px auto;
+    -webkit-transform: scale(0.1);
+
+}
+
+.afPopup.show {
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .afPopup>HEADER{
@@ -3299,101 +3407,101 @@ body {
     background: black !important;
     opacity: 0 !important;
 }
-	#afModalMask {
-		position:absolute;
-		top:0px;
-		left:0px;
-		width:100%;
-		height:100%;
-		background:transparent;
-		display:none;
-		z-index:9999;
-	}
+    #afModalMask {
+        position:absolute;
+        top:0px;
+        left:0px;
+        width:100%;
+        height:100%;
+        background:transparent;
+        display:none;
+        z-index:9999;
+    }
 
-	#afSelectBoxContainer {
-		position:absolute;
-		display:block;
-		width:90%;
-		max-width:280px;
-		margin-right:auto;
-		min-height:100px;
-		background:#303030;
-		color:white;
-		overflow:hidden;
-		z-index:9999;
-		max-height:300px;
-		margin-top: -150px;
-		top: 50%;
-		left: 50%;
-		margin-left: -138px;
-	}
+    #afSelectBoxContainer {
+        position:absolute;
+        display:block;
+        width:90%;
+        max-width:280px;
+        margin-right:auto;
+        min-height:100px;
+        background:#303030;
+        color:white;
+        overflow:hidden;
+        z-index:9999;
+        max-height:300px;
+        margin-top: -150px;
+        top: 50%;
+        left: 50%;
+        margin-left: -138px;
+    }
 
 
-	#afSelectBoxfix ul {
-		list-style-type:none;
-		padding:0px;
-		margin:0px;
-	}
-	#afSelectBoxfix li {
-		font-size: 1.1em;
-		color: #fff;
-		display: block;
-		line-height: 2.5em;
-		padding: 0 1em;
-		border-bottom: 1px solid #444;
-	}
-	#afSelectBoxfix .selected {
-		background:#33B5E5;
-	}
+    #afSelectBoxfix ul {
+        list-style-type:none;
+        padding:0px;
+        margin:0px;
+    }
+    #afSelectBoxfix li {
+        font-size: 1.1em;
+        color: #fff;
+        display: block;
+        line-height: 2.5em;
+        padding: 0 1em;
+        border-bottom: 1px solid #444;
+    }
+    #afSelectBoxfix .selected {
+        background:#33B5E5;
+    }
 
-	.afFakeSelect {
-		width: 200px;
-		height: 30px;
-		display: inline-block;
-		border: 1px solid #ccc;
-		border-radius: 5px;
-		line-height: 2em;
-		font-size: 1em;
-		padding-left: 10px;
-		position: relative;
-		padding-right: 35px;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		overflow: hidden;		
-	}
+    .afFakeSelect {
+        width: 200px;
+        height: 30px;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        line-height: 2em;
+        font-size: 1em;
+        padding-left: 10px;
+        position: relative;
+        padding-right: 35px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;       
+    }
 
-	.afFakeSelect:after {
-		position:absolute;
-		top:5px;
-		right:5px;
-   		border: 14px solid transparent;
-   		border-top-color: #ccc;
-   		content:'';
-	}
+    .afFakeSelect:after {
+        position:absolute;
+        top:5px;
+        right:5px;
+        border: 14px solid transparent;
+        border-top-color: #ccc;
+        content:'';
+    }
 
-	#afSelectBoxContainer #afSelectDone,#afSelectBoxContainer #afSelectCancel{
-		margin-top:10px;
-	    display: inline-block;
-	    height: 30px;
-	    width: 100px;
-	    background:#33B5E5;
-	    border: 1px solid #33B5E5;
-	    text-align: center;
-	    line-height: 2em;
-	    float: left;
-	    margin-left: 10px;
-	}
-	#afSelectBoxContainer #afSelectCancel {
-		float:right;
-		margin-right:10px;
-	}
-	#afSelectBoxContainer #afSelectClose {
-		overflow: hidden;
-		border-bottom: 1px solid #444;
-		padding-bottom:5px;
-	}
+    #afSelectBoxContainer #afSelectDone,#afSelectBoxContainer #afSelectCancel{
+        margin-top:10px;
+        display: inline-block;
+        height: 30px;
+        width: 100px;
+        background:#33B5E5;
+        border: 1px solid #33B5E5;
+        text-align: center;
+        line-height: 2em;
+        float: left;
+        margin-left: 10px;
+    }
+    #afSelectBoxContainer #afSelectCancel {
+        float:right;
+        margin-right:10px;
+    }
+    #afSelectBoxContainer #afSelectClose {
+        overflow: hidden;
+        border-bottom: 1px solid #444;
+        padding-bottom:5px;
+    }
 
-	select:disabled~.afFakeSelect {
-		background:#ccc;
-		color:black;
-	}
+    select:disabled~.afFakeSelect {
+        background:#ccc;
+        color:black;
+    }

@@ -10,6 +10,7 @@
 	"highlights":["IoT Companion App", "App Framework", "jQuery"],
     	"keywords":["IoT Companion App", "App Framework", "jQuery"],
 	"visible": "true",
+	"iot-companion":"true",
 	"apppreview":"false",
 	"appname":"demo.touchnotifiercompanion",
 	"relname":"4.0.0"
