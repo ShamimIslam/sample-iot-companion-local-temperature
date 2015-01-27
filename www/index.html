@@ -1,7 +1,7 @@
 <!DOCTYPE html><!--HTML5 doctype-->
 <html>
 <head>
-	<title>Touch Buzzer Companion App</title>
+	<title>Temperature Checker Companion App</title>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
 	<style type="text/css">
@@ -9,7 +9,7 @@
 		*  { -webkit-user-select:none; -webkit-tap-highlight-color:rgba(255, 255, 255, 0); }
 		input, textarea  { -webkit-user-select:text; }
 		body { background-color:white; color:black }
-	</style>  
+	</style>
     <!--  jQuery  -->
     <script src="lib/jquery/jquery-2.1.1.js"></script>
     <!--  App Framework  -->
@@ -17,7 +17,8 @@
     <script type="text/javascript" src="lib/appframework/jq.appframework.min.js"></script>
 <!--    <script type="text/javascript" src="lib/appframework/appframework.js"></script>-->
     <script type="text/javascript" charset="utf-8" src="lib/appframework/appframework.ui.min.js"></script>
-
+    
+    <script src="lib/d3/d3.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/main.css"></link>
     <script src="intelxdk.js"></script>
     <script src="cordova.js"></script>
@@ -30,29 +31,28 @@
             }
         } ;
         document.addEventListener("deviceready", onDeviceReady, false) ;
-     </script>
+    </script>
 </head>
 <body>
 	<div id="afui">
         
         <div id="content">
-
-            <div id="main" title="TouchNotifier" class="panel" data-footer="none">
+            
+            <div id="main" title="LocalTemperature" class="panel" data-footer="none">
                 <div class="center">
-                    <h1>Are you Expecting Anyone?</h1>
-                    <div id="notifier_circle" class="gray">
-                        
-                    </div>
-                </div>          
+                    <h1>How Hot is It?(°F)</h1>               
+                    <div id="gauge"><span>Temp</span></div>
+                    <div id="chart"></div>
+                </div>     
                 <div>
                     <b>Log:</b><br>
                     <div id="feedback_log" class="redtext"></div>
                 </div>
             </div>
             
-            <div class="panel" data-title="TouchNotifier Companion" modal="true" selected="true">
-                <p>Please provide an IP address & port to your TouchNotifier IoT project (Touch Sensor & Buzzer) on your development platform.</p>
-                <b>Note:</b> This is needed for establishing a connection betweeen your Companion App and Node.js/IoT application.
+            <div class="panel" data-title="LocalTemp Companion" modal="true" selected="true">
+                <p>Please provide an IP address & port to your LocalTemperature IoT project (Temperature Sensor) on your development platform.</p>
+                <em>Note:<em> This is needed for establishing a connection betweeen your Companion App and Node.js/IoT application.
                 <p>
                 <input id="ip_address" type="text" placeholder="Enter your IoT dev platform's IP Address">
                 <input id="port" type="text" placeholder="Enter your corresponding port number">

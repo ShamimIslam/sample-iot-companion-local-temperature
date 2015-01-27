@@ -6,37 +6,69 @@ h1{
     font-style: italic;
 }
 
-#notifier_circle{
-    display: inline-block;
-    margin-top: 18px;
-    -webkit-animation-name: spin;
-    -webkit-animation-duration: 3s;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-    -moz-animation-name: spin;
-    -moz-animation-duration: 3s;
-    -moz-animation-iteration-count: infinite;
-    -moz-animation-timing-function: linear;
-    -ms-animation-name: spin;
-    -ms-animation-duration: 3s;
-    -ms-animation-iteration-count: infinite;
-    -ms-animation-timing-function: linear;
-    
-    border-radius: 50%;
- }
-
-.green{
-    background-image: -moz-radial-gradient(45px 45px 45deg, circle cover, #80EE9F 0%, #1BCA37 100%, #AFEAAA 95%);
-    background-image: -webkit-radial-gradient(45px 45px, circle cover, #80EE9F, #1BCA37);
-    background-image: radial-gradient(45px 45px 45deg, circle cover, #80EE9F 0%, #1BCA37 100%, #AFEAAA 95%);
-}
-
-.gray{
-    background-image: -moz-radial-gradient(45px 45px 45deg, circle cover, rgba(182, 180, 180, 0.59) 0%, rgba(178, 190, 180, 0) 100%, black 95%);
-    background-image: -webkit-radial-gradient(45px 45px, circle cover, rgba(182, 180, 180, 0.59), rgba(178, 190, 180, 0));
-    background-image: radial-gradient(45px 45px 45deg, circle cover, rgba(182, 180, 180, 0.59) 0%, rgba(178, 190, 180, 0) 100%, black 95%);
+canvas{
+    margin-top: 100px;
 }
 
 .redtext{
 	color:red;
+}
+
+/*Styling for charts*/
+svg {
+  font: 10px sans-serif;
+    color: #FFF
+}
+ 
+ .tick {
+    fill: #c0392b;
+ }
+
+.dot {
+  cursor:pointer;
+}
+
+.lightline {
+  fill: none;
+  stroke: rgba(255,255,255,0.2);
+  stroke-width: 1.5px;
+}
+
+.line {
+  fill: none;
+  stroke: white;
+  stroke-width: 1.5px;
+}
+ 
+.axis path, .axis line {
+  fill: none;
+  stroke: rgba(255,255,255,0.2);
+  shape-rendering: crispEdges;
+}
+
+.fullwidth{
+    max-width: 100%;
+    overflow: hidden !important;
+}
+
+
+#chart{
+    color: blue !important; 
+    padding-left:5px;
+}
+
+
+#gauge{
+    width: 30%;
+    display: inline-block;
+    background-color: red;
+    border-bottom-right-radius: 2em;
+    border-bottom-left-radius: 2em;
+    border: 2px solid white;
+    color: white;
+    font-weight: bold;
+}
+
+span{
+    display:inline-block; vertical-align:middle;
 }
