@@ -1,168 +1,386 @@
-/*jslint plusplus:true*/
-
-/* jshint strict: true, -W097, unused:false, undef:true */
-/*global window, document, d3, $, io, navigator, setTimeout */
-
-var chart_data = [];
-/*Creation of the d3 ScatterPlot*/
-var splot_dataset = [];
-var chart_counter = 0;
-//shifting of line graph
-var xshift = -1;
-
-//Creation of the d3 Chart
-var chart_data = [];
-
-//Creation of d3 LineGraph with an initial value
-var chart_data_line = [10];
-
-//Creation of the d3 ScatterPlot
-var isPurged = 0;
-
-var chart_purge_time = 0;
-
-//Set the height of the gauge
-document.getElementById("gauge").setAttribute("style", "height:" + 0.20 * window.innerHeight + "px");
-
-//Create a JSON style object for the margin
-var margin = {
-    top: 10,
-    right: 20,
-    bottom: 20,
-    left: 20
+'use strict';
+var feedback_d = document.getElementById("feedback_div");
+var isChannelReady;
+var isInitiator = false;
+var isStarted = false;
+var localStream;
+var pc;
+var remoteStream;
+var turnReady;
+var socket = '';
+var room = '';
+var constraints;
+var pc_config = {
+    'iceServers': [{
+        'url': 'stun:stun.l.google.com:19302'
+    }]
+};
+var pc_constraints = {
+    'optional': [{
+        'DtlsSrtpKeyAgreement': true
+    }]
+};
+// Set up audio and video regardless of what devices are present.
+var sdpConstraints = {
+    'mandatory': {
+        'OfferToReceiveAudio': true,
+        'OfferToReceiveVideo': true
+    }
+};
+        
+//Store desired media attributes then access device camera and microphone
+constraints = {
+    video: true,
+    audio: true
 };
 
-var height = 0.5 * window.innerHeight;
+var localVideo = document.querySelector('#localVideo');
+var remoteVideo = document.querySelector('#remoteVideo');
+////////////////////////////////////////////////
 
-//Scatterplot-Selects the specified DOM element for appending the svg 
-var chart_svg = d3.select("#chart").append("svg").attr("id", "container1").attr("width", window.innerWidth).attr("height", 0.6 * height).append("g");
-
-chart_svg.attr("transform", "translate(25," + margin.top + ")");
-
-var x1 = d3.scale.linear().domain([0, 5000]).range([0, 100000]);
-
-var y1 = d3.scale.linear().domain([0, 200]).range([0.5 * height, 0]);
-
-//Add X Axis grid lines
-chart_svg.selectAll("line.y1")
-    .data(y1.ticks(10))
-    .enter().append("line")
-    .attr("class", "y")
-    .attr("x1", 0)
-    .attr("x2", 100000)
-    .attr("y1", y1)
-    .attr("y2", y1)
-    .style("stroke", "rgba(8, 16, 115, 0.2)");
-
-//This is for the Scatterplot X axis label
-chart_svg.append("text").attr("fill", "red").attr("text-anchor", "end").attr("x", 0.5 * window.innerWidth).attr("y", 0.55 * height).text("Periods");
-
-var x1Axis = d3.svg.axis().scale(x1).orient("top").tickPadding(0).ticks(1000);
-var y1Axis = d3.svg.axis().scale(y1).orient("left").tickPadding(0);
-
-chart_svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + y1.range()[0] + ")").call(x1Axis);
-
-chart_svg.append("g").attr("class", "y axis").call(y1Axis);
-
-
-chart_purge_time = Math.round(((window.innerWidth * 40) / 969) - 2);
-
-function purgeData() {
-    'use strict';
-    chart_counter = 0;
-    xshift = -1;
-    chart_data_line = [10];
-    splot_dataset = [];
-    //Remove all of the nodes from the charts
-    chart_svg.selectAll("#chart_graph").remove();
-    //Data has been purged
-    isPurged = 1;
+//Emit 'message' event to server with information(message) 
+function sendMessage(message) {
+    console.log('Client sending message: ', message);
+    // if (typeof message === 'object') {
+    //   message = JSON.stringify(message);
+    // }
+    socket.emit('message', message);
 }
+/////////////////////////////////////////////
 
-function plot() {
-    /*-------------------------------For the Line Graph-------------------------------*/
-    'use strict';
-    chart_data.unshift(chart_counter);
-    //Add new element to the end of the array
-    splot_dataset.push(chart_data);
-    //Empty heart rate data array
-    chart_data = [];
-    chart_counter++;
-    //Draw Line Graph && Draw circles
-    chart_svg.selectAll("circle").data(splot_dataset).enter().append("svg").attr("id", "chart_graph").append("circle")
-        .attr("cx", function (d, i) {
-            return x1(d[0]);
-        }).attr("cy", function (d) {
-            return y1(d[1]);
-        }).attr("r", 3).attr("class", "dot")
-        .style("fill", function (d) {
-            if (d[1] > 100) {
-                return "red";
-            } else if ((d[1] > 59) && (d[1] < 101)) {
-                return "green";
-            } else {
-                return "white";
+//Connect to websocket server, listen for server emitted 'events'
+function connect() {
+    alert("This project requires that both clients are equipped with an active camera & microphone module!");
+    room = $('#room_input').val();
+    
+    if (room != '') {
+        if(socket == ""){
+            console.log("Fresh Connection");
+            feedback_d.innerHTML = "<em>Connecting.......</em>";
+            socket = io.connect("http://signalstore.html5m.com:5238");
+        }
+        else if(socket.socket.connected == false){
+            socket.socket.reconnect();
+            feedback_d.innerHTML = "<em>Reconnecting.......</em>";
+        }
+        console.log("Before timeout, socket is connected: "+socket.socket.connected);
+        
+        setTimeout(function(){
+            if (socket.socket.connected == true) {
+                console.log("Attempt to create room, socket is connected: "+socket.socket.connected);
+                console.log('Create or join room', room);
+                socket.emit('create or join', room);
+
+                socket.on('created', function(room) {
+                    console.log('Created room ' + room);
+                    feedback_d.innerHTML = "<em>Created room </em>" + room;
+                    isInitiator = true;
+                });
+
+                socket.on('full', function(room) {
+                    console.log('Room ' + room + ' is full');
+                    feedback_d.innerHTML = feedback_d.innerHTML + "<br>" + "<em>Room </em>" + room + "<em> is full</em>";
+                });
+
+                socket.on('join', function(room) {
+                    console.log('This peer is the initiator of room ' + room + '!');
+                    feedback_d.innerHTML = feedback_d.innerHTML + "<br>" + "<em>This peer is the initiator of room " + room + "!</em>";
+                    console.log('Another peer made a request to join room ' + room);
+                    feedback_d.innerHTML = feedback_d.innerHTML + "<br>" +"<em>Another peer made a request to join room " + room+"!</em>";
+                    isChannelReady = true;
+                });
+
+                socket.on('joined', function(room) {
+                    console.log('This peer has joined room ' + room);
+                    feedback_d.innerHTML = "<em>This peer has joined room " + room+"</em>";
+                    isChannelReady = true;
+                });
+
+                socket.on('log', function(array) {
+                    console.log.apply(console, array);
+                });
+
+                socket.on('leave', function(room) {
+                    console.log('Client(s) session has been completely disconnected from server & room '+room+"!");
+                    feedback_d.innerHTML = feedback_d.innerHTML + "<br>" + "<em>Client(s) session has been completely disconnected from server & room "+room+"!</em>";
+                    stop('true');
+                });
+
+                socket.on('message', function(message) {
+                    console.log('Client received message:', message);
+                    if (message === 'got user media') {
+                        maybeStart();
+                    } else if (message.type === 'offer') {
+                        if (!isInitiator && !isStarted) {
+                            console.log("isInitiator? "+isInitiator+" and isStarted?"+isStarted);
+                            maybeStart();
+                        }
+                        pc.setRemoteDescription(new RTCSessionDescription(message));
+                        doAnswer();
+                    } else if (message.type === 'answer' && isStarted) {
+                        pc.setRemoteDescription(new RTCSessionDescription(message));
+                    } else if (message.type === 'candidate' && isStarted) {
+                        var candidate = new RTCIceCandidate({
+                            sdpMLineIndex: message.label,
+                            candidate: message.candidate
+                        });
+                        pc.addIceCandidate(candidate);
+                    } else if (message === 'bye' && isStarted) {
+                        handleRemoteHangup();
+                    }
+                });
+
+                navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+                navigator.getUserMedia(constraints, handleUserMedia, handleUserMediaError);
+                //console.log('Getting user media with constraints', constraints);
+                document.getElementById("stopbtn").removeAttribute("style");
+                document.getElementById("joinbtn").style.display = "none";
             }
-        }).attr("stroke", "black").attr("stroke-width", 1);
-    //Handle purging data
-    if ((chart_purge_time === chart_counter) || (chart_counter > chart_purge_time)) {
-        purgeData();
+        
+            else {
+                feedback_d.innerHTML = feedback_d.innerHTML + "<br> Unable to connect to signalling server due to network settings..";
+            }
+        }, 2000); 
+    } 
+    
+    else {
+        alert("No room specified!! Please specify a room name.");
+    }
+    
+}
+////////////////////////////////////////////////////
+
+function handleUserMedia(stream) {
+    console.log('Adding local stream.');
+    localVideo.src = window.URL.createObjectURL(stream);
+    localStream = stream;
+    sendMessage('got user media');
+    if (isInitiator) {
+        maybeStart();
     }
 }
 
-/*
-Function: validateIP()
-Description: Attempt to connect to server/Intel IoT platform
-*/
-function validateIP() {
-    'use strict';
-    var socket,
-    //Get values from text fields
-        ip_addr = $("#ip_address").val(),
-        port = $("#port").val(),
-        script = document.createElement("script");
-
-    //create script tag for socket.io.js file located on your IoT platform (development board)
-    script.setAttribute("src", "http://" + ip_addr + ":" + port + "/socket.io/socket.io.js");
-    document.head.appendChild(script);
-    
-    //Wait 1 second before attempting to connect
-    setTimeout(function(){
-        try {
-            //Connect to Server
-            socket = io.connect("http://" + ip_addr + ":" + port);
-
-            //Attach a 'connected' event handler to the socket
-            socket.on("connected", function (message) {
-                //Apache Cordova Notification
-                navigator.notification.alert(
-                    "Great Job!",  // message
-                    "",                     // callback
-                    'You are Connected!',            // title
-                    'Ok'                  // buttonName
-                );
-
-                //Set all Back button to not show
-                $.ui.showBackButton = false;
-                //Load page with transition
-                $.ui.loadContent("#main", false, false, "fade");
-            });
-
-            socket.on("message", function (message) {
-                chart_data.push(message);
-                plot();
-                //Update log
-                $("#feedback_log").text("Last Updated at " + Date().substr(0, 21));
-            });
-        } catch (e) {
-            navigator.notification.alert(
-                "Server Not Available!",  // message
-                "",                     // callback
-                'Connection Error!',            // title
-                'Ok'                  // buttonName
-            );
+function handleUserMediaError(error) {
+    console.log('navigator.getUserMedia error: ', error);
+}
+//
+function maybeStart() {
+    if (!isStarted && typeof localStream != 'undefined' && isChannelReady) {
+        createPeerConnection();
+        pc.addStream(localStream);
+        isStarted = true;
+        console.log('isInitiator', isInitiator);
+        if (isInitiator) {
+            doCall();
         }
-    }, 1000);
-
+    }
 }
 
+window.onbeforeunload = function(e) {
+    sendMessage('bye');
+}
+/////////////////////////////////////////////////////////
+//
+function createPeerConnection() {
+    try {
+        pc = new webkitRTCPeerConnection(null);
+        pc.onicecandidate = handleIceCandidate;
+        pc.onaddstream = handleRemoteStreamAdded;
+        pc.onremovestream = handleRemoteStreamRemoved;
+        console.log('Created RTCPeerConnnection');
+    } catch (e) {
+        console.log('Failed to create PeerConnection, exception: ' + e.message);
+        alert('Cannot create RTCPeerConnection object.');
+        return;
+    }
+}
+
+//
+function handleIceCandidate(event) {
+    console.log('handleIceCandidate event: ', event);
+    if (event.candidate) {
+        sendMessage({
+            type: 'candidate',
+            label: event.candidate.sdpMLineIndex,
+            id: event.candidate.sdpMid,
+            candidate: event.candidate.candidate
+        });
+    } else {
+        console.log('End of candidates.');
+    }
+}
+
+//
+function handleRemoteStreamAdded(event) {
+    console.log('Remote stream added.');
+    remoteVideo.src = window.URL.createObjectURL(event.stream);
+    remoteStream = event.stream;
+}
+
+//
+function handleCreateOfferError(event) {
+    console.log('createOffer() error: ', e);
+}
+
+//
+function doCall() {
+    console.log('Sending offer to peer');
+    pc.createOffer(setLocalAndSendMessage, handleCreateOfferError);
+}
+
+//
+function doAnswer() {
+    console.log('Sending answer to peer.');
+    pc.createAnswer(setLocalAndSendMessage, null, sdpConstraints);
+}
+
+//
+function setLocalAndSendMessage(sessionDescription) {
+    // Set Opus as the preferred codec in SDP if Opus is present.
+    sessionDescription.sdp = preferOpus(sessionDescription.sdp);
+    pc.setLocalDescription(sessionDescription);
+    console.log('setLocalAndSendMessage sending message', sessionDescription);
+    sendMessage(sessionDescription);
+}
+
+//
+function requestTurn(turn_url) {
+    var turnExists = false;
+    for (var i in pc_config.iceServers) {
+        if (pc_config.iceServers[i].url.substr(0, 5) === 'turn:') {
+            turnExists = true;
+            turnReady = true;
+            break;
+        }
+    }
+    if (!turnExists) {
+        console.log('Getting TURN server from ', turn_url);
+        // No TURN server. Get one from computeengineondemand.appspot.com:
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var turnServer = JSON.parse(xhr.responseText);
+                console.log('Got TURN server: ', turnServer);
+                pc_config.iceServers.push({
+                    'url': 'turn:' + turnServer.username + '@' + turnServer.turn,
+                    'credential': turnServer.password
+                });
+                turnReady = true;
+            }
+        };
+        xhr.open('GET', turn_url, true);
+        xhr.send();
+    }
+}
+
+
+//Display event for onremoveStream
+function handleRemoteStreamRemoved(event) {
+    console.log('Remote stream removed. Event: ', event);
+}
+
+//
+function hangup() {
+    //console.log('Hanging up.');
+    //stop();
+    //sendMessage('bye');
+}
+
+//Stop session is remote client leaves
+function handleRemoteHangup() {
+    //  console.log('Session terminated.');
+    // stop();
+    // isInitiator = false;
+}
+
+//Send server leave message, reset videos, set peer connection to null
+function stop(fromserver) {
+    //Hide 'End session' button; Show 'Join Room' button
+    document.getElementById("stopbtn").style.display = "none";
+    document.getElementById("joinbtn").removeAttribute("style");
+    if(fromserver == 'false'){
+        console.log("room name: "+room);
+        socket.emit('leave', room);
+        feedback_d.innerHTML = feedback_d.innerHTML + "<br>" + "<em>Client(s) session has been terminated!</em>";
+    }
+    isStarted = false;
+    localStream.stop();
+    localVideo.src = "";
+    remoteVideo.src = "";
+    //pc.close();
+    pc = null;
+    socket.removeAllListeners(); //Prevents replication of eventlisteners
+}
+///////////////////////////////////////////
+
+//Set Opus as the default audio codec if it's present.
+function preferOpus(sdp) {
+    var sdpLines = sdp.split('\r\n');
+    var mLineIndex;
+    // Search for m line.
+    for (var i = 0; i < sdpLines.length; i++) {
+        if (sdpLines[i].search('m=audio') !== -1) {
+            mLineIndex = i;
+            break;
+        }
+    }
+    if (mLineIndex === null) {
+        return sdp;
+    }
+    // If Opus is available, set it as the default in m line.
+    for (i = 0; i < sdpLines.length; i++) {
+        if (sdpLines[i].search('opus/48000') !== -1) {
+            var opusPayload = extractSdp(sdpLines[i], /:(\d+) opus\/48000/i);
+            if (opusPayload) {
+                sdpLines[mLineIndex] = setDefaultCodec(sdpLines[mLineIndex], opusPayload);
+            }
+            break;
+        }
+    }
+    // Remove CN in m line and sdp.
+    sdpLines = removeCN(sdpLines, mLineIndex);
+    sdp = sdpLines.join('\r\n');
+    return sdp;
+}
+
+// Extract session description protocol (sdp)
+function extractSdp(sdpLine, pattern) {
+    var result = sdpLine.match(pattern);
+    return result && result.length === 2 ? result[1] : null;
+}
+
+//Set the selected codec to the first in m line.
+function setDefaultCodec(mLine, payload) {
+    var elements = mLine.split(' ');
+    var newLine = [];
+    var index = 0;
+    for (var i = 0; i < elements.length; i++) {
+        if (index === 3) { // Format of media starts from the fourth.
+            newLine[index++] = payload; // Put target payload to the first.
+        }
+        if (elements[i] !== payload) {
+            newLine[index++] = elements[i];
+        }
+    }
+    return newLine.join(' ');
+}
+
+//Strip CN from sdp before CN constraints is ready.
+function removeCN(sdpLines, mLineIndex) {
+    var mLineElements = sdpLines[mLineIndex].split(' ');
+    // Scan from end for the convenience of removing an item.
+    for (var i = sdpLines.length - 1; i >= 0; i--) {
+        var payload = extractSdp(sdpLines[i], /a=rtpmap:(\d+) CN\/\d+/i);
+        if (payload) {
+            var cnPos = mLineElements.indexOf(payload);
+            if (cnPos !== -1) {
+                // Remove CN payload from m line.
+                mLineElements.splice(cnPos, 1);
+            }
+            // Remove CN line in sdp
+            sdpLines.splice(i, 1);
+        }
+    }
+    sdpLines[mLineIndex] = mLineElements.join(' ');
+    return sdpLines;
+}

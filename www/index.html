@@ -1,7 +1,7 @@
 <!DOCTYPE html><!--HTML5 doctype-->
 <html>
 <head>
-	<title>Temperature Checker Companion App</title>
+	<title>WebRTC Video Chat Client</title>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
 	<style type="text/css">
@@ -10,20 +10,15 @@
 		input, textarea  { -webkit-user-select:text; }
 		body { background-color:white; color:black }
 	</style>
-    <!--  jQuery  -->
-    <script src="lib/jquery/jquery-2.1.1.js"></script>
-    <!--  App Framework  -->
-    <link rel="stylesheet" type="text/css" href="lib/appframework/af.ui.css"></link>
-    <script type="text/javascript" src="lib/appframework/jq.appframework.min.js"></script>
-<!--    <script type="text/javascript" src="lib/appframework/appframework.js"></script>-->
-    <script type="text/javascript" charset="utf-8" src="lib/appframework/appframework.ui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="appframework/af.ui.css"></link>
+    <script type="text/javascript" charset="utf-8" src="appframework/appframework.ui.min.js"></script>
     
-    <script src="lib/d3/d3.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/main.css"></link>
     <script src="intelxdk.js"></script>
     <script src="cordova.js"></script>
     
     <script src='xhr.js'></script>
+    <script src="http://signalstore.html5m.com:5238/socket.io/socket.io.js"></script>
     <script type="text/javascript">
         var onDeviceReady=function(){                             // called when Cordova is ready
            if( window.Cordova && navigator.splashscreen ) {     // Cordova API detected
@@ -31,35 +26,39 @@
             }
         } ;
         document.addEventListener("deviceready", onDeviceReady, false) ;
-    </script>
+     </script>
 </head>
 <body>
 	<div id="afui">
         
         <div id="content">
-            
-            <div id="main" title="LocalTemperature" class="panel" data-footer="none">
-                <div class="center">
-                    <h1>How Hot is It?(°F)</h1>               
-                    <div id="gauge"><span>Temp</span></div>
-                    <div id="chart"></div>
-                </div>     
+
+            <div id="main" title="WebRTC VChat" class="panel" data-footer="none" selected="true">
+                <div id="videos_div">
+                    <div id="myvideo_div" class="video_bdr">
+                        <video id="localVideo" autoplay muted="muted"></video>
+                    </div>
+                    <div id="remotevideo_div" class="video_bdr">
+                        <video id="remoteVideo" autoplay></video>
+                    </div>    
+                </div>
+                <div id="room_div">
+                    <input type="text" placeholder="Room Name" id="room_input"/>
+                    <a id="joinbtn" class="button" onclick="connect()">Join Room</a>
+                    <a id="stopbtn" class="button red" style="display:none" onclick="stop('false')">End Session!</a>
+                </div>
                 <div>
                     <b>Log:</b><br>
-                    <div id="feedback_log" class="redtext"></div>
+                    <div id="feedback_div" class="redtext"></div>
                 </div>
-            </div>
-            
-            <div class="panel" data-title="LocalTemp Companion" modal="true" selected="true">
-                <p>Please provide an IP address & port to your LocalTemperature IoT project (Temperature Sensor) on your development platform.</p>
-                <em>Note:<em> This is needed for establishing a connection betweeen your Companion App and Node.js/IoT application.
-                <p>
-                <input id="ip_address" type="text" placeholder="Enter your IoT dev platform's IP Address">
-                <input id="port" type="text" placeholder="Enter your corresponding port number">
-                <a class="block button" onclick="validateIP()">Submit</a>
             </div>
         </div>
     </div>
 </body>
 <script type="text/javascript" src="js/main.js"></script>
+<!--<script type="text/javascript">
+	setTimeout(function(){
+	   alert("Note: This sample should be built with 'Crosswalk for Android' Build target.")
+	},3000);
+</script>-->
 </html>

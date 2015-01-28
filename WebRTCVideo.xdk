@@ -2,14 +2,14 @@
   "project": {
     "projectSettingsVersion": "1.1",
     "creationData": {
-      "type": "Blank Project",
+      "type": "Demo",
       "createDefaultBuildConfigs": true,
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
-      "src": "blankproject",
+      "src": "https://edge-intel.s3.amazonaws.com/samples/production/sample-webrtc-video-client/sample.zip",
       "sourceDirectory": "www",
-      "projectGuid": "cf0dc6e1-2bec-451e-b317-c158752a2ca0",
-      "lastModifiedDate": 1409326991021,
-      "creationDate": 1409315827961
+      "projectGuid": "38f9ea64-2f85-4d59-92db-3b60d13ecbe9",
+      "lastModifiedDate": 1407991943748,
+      "creationDate": 1407991521216
     },
     "sourceDirectory": "www",
     "cordovaPluginsDirectory": "plugins",
@@ -34,20 +34,6 @@
     ],
     "cordovaPlugins": [
       {
-        "id": "org.apache.cordova.vibration",
-        "version": "0.3.8",
-        "selectedState": "Included",
-        "data": {},
-        "paramvals": {}
-      },
-      {
-        "id": "org.apache.cordova.dialogs",
-        "version": "0.2.6",
-        "selectedState": "Included",
-        "data": {},
-        "paramvals": {}
-      },
-      {
         "id": "org.apache.cordova.splashscreen",
         "version": "0.3.0",
         "selectedState": "Included",
@@ -69,7 +55,7 @@
         "name_": "Android",
         "preferences_": {},
         "isActive_": true,
-        "appName_": "LocalTemperature",
+        "appName_": "webrtc",
         "appID_": "not.yet.specified",
         "appAccess_": "*",
         "icons_": [],
@@ -87,7 +73,7 @@
         "name_": "Android-Crosswalk",
         "preferences_": {},
         "isActive_": true,
-        "appName_": "LocalTemperature",
+        "appName_": "webrtc",
         "appID_": "not.yet.specified",
         "appAccess_": "*",
         "icons_": [],
@@ -105,7 +91,7 @@
         "name_": "iOS",
         "preferences_": {},
         "isActive_": true,
-        "appName_": "LocalTemperature",
+        "appName_": "webrtc",
         "appID_": "not.yet.specified",
         "appAccess_": "*",
         "icons_": [],
@@ -123,7 +109,7 @@
         "name_": "Windows8",
         "preferences_": {},
         "isActive_": true,
-        "appName_": "LocalTemperature",
+        "appName_": "webrtc",
         "appID_": "not.yet.specified",
         "appAccess_": "*",
         "icons_": [],
@@ -141,7 +127,7 @@
         "name_": "WindowsPhone8",
         "preferences_": {},
         "isActive_": true,
-        "appName_": "LocalTemperature",
+        "appName_": "webrtc",
         "appID_": "not.yet.specified",
         "appAccess_": "*",
         "icons_": [],
