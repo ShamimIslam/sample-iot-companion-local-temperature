@@ -10,7 +10,7 @@
 	"highlights":["IoT Companion App", "App Framework", "jQuery", "d3 "],
     "keywords":["IoT Companion App", "App Framework", "jQuery", "d3 "],
 	"visible": "true",
-	"iot-companion":"true",
+	"iotCompanion":"true",
 	"apppreview":"false",
 	"appname":"demo.iotcompanionlocaltemperature",
 	"relname":"4.0.0",
