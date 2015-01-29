@@ -1,20 +1,26 @@
-crosswalk-webrtc-video-client
-=============================
-Crosswalk Build Target Recommended-This sample demonstrates how to connect to a web server which handles and connects clients' traffic.
+Local Temperature Companion App
+============================
+The Local Temperature Companion App is a simple app that visualizes data received from the Local Temperature node.js/IoT project when running on a IoT platform such as a development board with a Temperature sensor connected. This sensor is included in the Grove Starter Kit Plus - Intel® IoT Edition. For more information, go to https://software.intel.com/en-us/iot/devkit.
 
 Intel(R) XDK 
 -------------------------------------------
-This sample is part of the Intel(R) XDK. Download the Intel(R) XDK at http://software.intel.com/en-us/html5. To see the technical details of the sample, please visit the sample article page at http://software.intel.com/en-us/html5/webrtc-client-and-server.
+This sample is part of the Intel(R) XDK IoT Edition. 
+Download the Intel(R) XDK IoT Edition at https://software.intel.com/en-us/html5/xdk-iot. To see the technical details of the sample, 
+please visit the sample article page at http://software.intel.com/en-us/html5/articles/iot-local-temperature-nodejs-&-companion.
 
 
 Important App Files
 ---------------------------
-* app.json
-* icon.png
 * index.html
+* icon.png
 * screenshot.png
+* app.json
+* README.md
 * js/*
+* app_framework/*
 * css/*
+* jquery/*
+* d3/*
 
 License Information Follows
 ---------------------------
@@ -43,8 +49,23 @@ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
 GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
 HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT 
 LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT 
-OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE
+OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-codelab webrtc
-----------------------
-* source: https://bitbucket.org/webrtc/codelab/overview
+
+App Framework
+-----------------------------------------------------------------------------
+http://app-framework-software.intel.com/
+source: https://github.com/01org/appframework
+license: https://raw.githubusercontent.com/01org/appframework/master/license.txt
+
+jQuery
+-----------------------------------------------------------------------------
+http://jquery.com/
+source: https://github.com/jquery/jquery
+license: https://raw.githubusercontent.com/jquery/jquery/master/LICENSE.txt
+
+d3
+-----------------------------------------------------------------------------
+http://d3js.org/
+source: https://github.com/mbostock/d3
+license: https://github.com/mbostock/d3/blob/master/LICENSE
