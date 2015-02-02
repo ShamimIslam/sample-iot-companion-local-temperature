@@ -1,13 +1,13 @@
 {
   "project": {
-    "projectSettingsVersion": "1.1",
+    "projectSettingsVersion": "1.2",
     "creationData": {
       "type": "Blank Project",
       "createDefaultBuildConfigs": true,
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "blankproject",
       "sourceDirectory": "www",
-      "projectGuid": "cf0dc6e1-2bec-451e-b317-c158752a2ca0",
+			"projectGuid": "00000000-0000-0000-0000-000000000000",
       "lastModifiedDate": 1409326991021,
       "creationDate": 1409315827961
     },
@@ -77,8 +77,8 @@
         "iosProvs_": [],
         "addlPermissions_": "",
         "excludedLibraries_": "",
-        "cordovaCLIVersion_": "3.5",
-        "crosswalkVersion_": "stable",
+        "cordovaCLIVersion_": "?",
+        "crosswalkVersion_": "?",
         "appVersion_": "1.0.0",
         "runtime_": "Cordova 3.x"
       },
@@ -95,8 +95,8 @@
         "iosProvs_": [],
         "addlPermissions_": "",
         "excludedLibraries_": "",
-        "cordovaCLIVersion_": "3.5",
-        "crosswalkVersion_": "stable",
+        "cordovaCLIVersion_": "?",
+        "crosswalkVersion_": "?",
         "appVersion_": "1.0.0",
         "runtime_": "Crosswalk with Cordova 3.x"
       },
@@ -113,8 +113,8 @@
         "iosProvs_": [],
         "addlPermissions_": "",
         "excludedLibraries_": "",
-        "cordovaCLIVersion_": "3.5",
-        "crosswalkVersion_": "stable",
+        "cordovaCLIVersion_": "?",
+        "crosswalkVersion_": "?",
         "appVersion_": "1.0.0",
         "runtime_": "Cordova 3.x"
       },
@@ -131,8 +131,8 @@
         "iosProvs_": [],
         "addlPermissions_": "",
         "excludedLibraries_": "",
-        "cordovaCLIVersion_": "3.5",
-        "crosswalkVersion_": "stable",
+        "cordovaCLIVersion_": "?",
+        "crosswalkVersion_": "?",
         "appVersion_": "1.0.0.0",
         "runtime_": "Cordova 3.x"
       },
@@ -149,8 +149,8 @@
         "iosProvs_": [],
         "addlPermissions_": "",
         "excludedLibraries_": "",
-        "cordovaCLIVersion_": "3.5",
-        "crosswalkVersion_": "stable",
+				"cordovaCLIVersion_": "?",
+        "crosswalkVersion_": "?",
         "appVersion_": "1.0.0.0",
         "runtime_": "Cordova 3.x"
       }
