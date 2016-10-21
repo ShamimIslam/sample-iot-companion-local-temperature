@@ -1,29 +1,13 @@
 {
-   "repoName" : "sample-iot-companion-local-temperature",
-   "appPreview" : false,
-   "projectTypeName" : "com.intel.xdk.projecttype.jsapp",
-   "highlights" : [
-      "IoT Companion App",
-      "App Framework",
-      "jQuery",
-      "d3 "
-   ],
-   "articleUrl" : "http://software.intel.com/en-us/html5/articles/iot-local-temperature-nodejs-&-companion",
-   "mobile" : false,
-   "title" : "Local Temperature Companion App",
-   "abbr" : "Local Temperature",
-   "iconUrl" : "",
-   "appName" : "demo.iotcompanionlocaltemperature",
-   "tooltip" : "A simple app that visualizes data received wirelessly from the Local Temperature node.js/IoT project when running on a IoT platform such as a development board with a Temperature Sensor connected. The complimentary Node.js IoT project is visible under Internet of Things (IoT) with Node.js Projects: Start with a Sample or Template.",
-   "description" : "A simple app that visualizes data received wirelessly from the Local Temperature node.js/IoT project when running on a IoT platform such as a development board with a Temperature Sensor connected. The complimentary Node.js IoT project is visible under Internet of Things (IoT) with Node.js Projects: Start with a Sample or Template.",
-   "relName" : "4.0.0",
-   "keywords" : [
-      "IoT Companion App",
-      "App Framework",
-      "jQuery",
-      "d3 "
-   ],
-   "screenshotUrl" : "",
-   "iotCompanion" : "true",
-   "visible" : true
+  "title" : "Local Temperature Companion App",
+  "projectTypeName" : "com.intel.xdk.projecttype.jsapp",
+  "sample": true,
+  "template": false,
+  "visible" : true,
+  "sortWeight" : "0.0",
+  "repoName" : "sample-iot-companion-local-temperature",
+  "tooltip" : "Companion app for the 'Local Temperature' IoT Node.js app.",
+  "description" : "An IoT companion app that visualizes data received wirelessly from the 'Local Temperature' IoT Node.js project (which needs to be  running on a IoT platform with an appropriate temperature sensor attached. The matching IoT Node.js project can be found under the Internet of Things (IoT) with Node.js Projects: Start with a Sample or Template.",
+  "articleUrl" : "http://software.intel.com/en-us/html5/articles/iot-local-temperature-nodejs-&-companion",
+  "keywords" : ["IoT Companion App","App Framework","jQuery","d3"]
 }
