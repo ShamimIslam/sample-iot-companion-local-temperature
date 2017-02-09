@@ -1,6 +1,5 @@
 Local Temperature IoT Companion App
 ===================================
-
 See [LICENSE.md](LICENSE.md) for license terms and conditions.
 
 This sample application is distributed as part of the
@@ -14,25 +13,23 @@ Intel XDK, please start with
 
 App Overview
 ------------
-The Local Temperature Companion App is a simple app that visualizes
-data received from the Local Temperature node.js/IoT project when
-running on a IoT platform such as a development board with a
-Temperature sensor connected. This sensor is included in the Grove
-Starter Kit Plus - Intel® IoT Edition. For more information, go to
-<https://software.intel.com/en-us/iot/devkit>.
+This "Local Temperature" mobile companion app presents data received from an
+IoT app that is running on an IoT device, such as an IoT development board
+with an attached temperature sensor.
 
-Important Sample App Files
---------------------------
-* index.html
-* js/*
-* css/*
-* lib/d3/*
-* lib/jquery/*
-* lib/app_framework/*
+This mobile companion app works in conjunction with an IoT app also named
+"Local Temperature." The corresponding IoT app is a Node.js IoT project that
+can be found in the "Templates" section of the "Internet of Things Embedded
+Application" section of the "Start a New Project" page (located on the
+Projects tab). See that app for additional details.
 
-Important Sample Project Files
-------------------------------
+Important App Files
+-------------------
+* www/index.html
+* js/main.js
+
+Important Project Files
+-----------------------
 * README.md
 * LICENSE.md
-* project-name.xdk
-* project-name.xdke
+* <project-name>.xdk
