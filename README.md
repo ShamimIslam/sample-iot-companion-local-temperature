@@ -1,5 +1,6 @@
 Local Temperature IoT Companion App
 ===================================
+
 See [LICENSE.md](LICENSE.md) for license terms and conditions.
 
 This sample application is distributed as part of the
@@ -13,6 +14,7 @@ Intel XDK, please start with
 
 App Overview
 ------------
+
 This "Local Temperature" mobile companion app presents data received from an
 IoT app that is running on an IoT device, such as an IoT development board
 with an attached temperature sensor.
@@ -25,11 +27,13 @@ Projects tab). See that app for additional details.
 
 Important App Files
 -------------------
+
 * www/index.html
 * js/main.js
 
 Important Project Files
 -----------------------
+
 * README.md
 * LICENSE.md
 * \<project-name\>.xdk

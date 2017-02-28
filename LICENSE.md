@@ -34,19 +34,22 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 App Framework
--------------
+=============
+
 http://app-framework-software.intel.com/
 source: https://github.com/01org/appframework
 license: https://raw.githubusercontent.com/01org/appframework/master/license.txt
 
-jQuery
-------
+jQuery Library
+==============
+
 http://jquery.com/
 source: https://github.com/jquery/jquery
 license: https://raw.githubusercontent.com/jquery/jquery/master/LICENSE.txt
 
-d3
---
+d3 Library
+==========
+
 http://d3js.org/
 source: https://github.com/mbostock/d3
 license: https://github.com/mbostock/d3/blob/master/LICENSE
