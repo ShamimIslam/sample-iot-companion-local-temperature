@@ -4,7 +4,7 @@
   "sample" : true,
   "template": false,
   "visible" : true,
-  "sortWeight" : "0.0",
+  "sortWeight" : "0.7",
   "repoName" : "sample-iot-companion-local-temperature",
   "tooltip" : "IoT mobile companion app for the \"Local Temperature\" IoT Node.js app.",
   "description" : "An IoT mobile companion app that visualizes data received wirelessly from the \"Local Temperature\" IoT Node.js project (which needs to be running on a IoT platform with an appropriate temperature sensor attached). The complementary IoT Node.js app is named \"Local Temperature\" and can be found in the \"Templates\" section of the \"Internet of Things (IoT)\" part of the \"Start a New Project\" page (from the Projects tab).",
